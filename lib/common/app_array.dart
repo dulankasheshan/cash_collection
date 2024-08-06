@@ -6,7 +6,54 @@ class AppArray {
   final appNameLogo = 'assets/image/app_name_logo.png';
   final appVersion = '1.1.0';
 
+  final List<String> bankNames = [
+    'Bank of Ceylon (BOC)',
+    'People\'s Bank',
+    'Commercial Bank of Ceylon',
+    'Hatton National Bank (HNB)',
+    'Sampath Bank',
+    'Seylan Bank',
+    'Nations Trust Bank (NTB)',
+    'Pan Asia Bank',
+    'Amana Bank',
+    'Cargills Bank',
+    'Citibank',
+    'Deutsche Bank',
+    'DFCC Bank',
+    'Habib Bank',
+    'Indian Bank',
+    'Indian Overseas Bank',
+    'MCB Bank',
+    'National Development Bank (NDB)',
+    'Public Bank Berhad',
+    'Standard Chartered Bank',
+    'State Bank of India',
+    'The Hongkong and Shanghai Banking Corporation (HSBC)',
+    'Union Bank of Colombo',
+    'Housing Development Finance Corporation (HDFC)',
+    'National Savings Bank (NSB)',
+    'Regional Development Bank (Pradheshiya Sanwardhana Bank)',
+    'Sanasa Development Bank',
+    'Sri Lanka Savings Bank',
+    'Lanka Orix Finance',
+    'LB Finance',
+    'ICICI Bank',
+    'Shinhan Bank',
+    'China Construction Bank',
+    'Bank of China',
+    'DBS Bank',
+    'Uteem Bank',
+    'JPMorgan Chase',
+    'Royal Bank of Scotland',
+    'Westpac',
+    'BNP Paribas',
+    'Macquarie Bank',
+    'Citibank N.A.',
+    'Standard Bank',
+  ];
+
   //User contact link
+  final userPin = 12345;
   final contactNumber = '+94712345678';
   final contactEmail = 'abc@abc.abc';
   final websiteLink = 'https://www.google.com';

@@ -1,9 +1,9 @@
 import 'package:cash_collection/common/assets/index.dart';
+import 'package:cash_collection/screens/auth/commom_widgets/use_email_and_use_pin_widget.dart';
 import 'package:cash_collection/screens/auth/login_screen/login_screen.dart';
 import 'package:cash_collection/screens/home_dashbord_screen/home_dashbord_screen.dart';
 import 'package:cash_collection/widgets/common_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +11,7 @@ import '../../../../common/theme/size_class.dart';
 import '../../../../common/theme/theme_service.dart';
 import '../../../../providers/login_pin_screen_provider.dart';
 import '../../../../widgets/common_button_auth.dart';
+import '../../pin_reset_screen/pin_reset_screen.dart';
 
 class LoginPinScreenBody extends StatefulWidget {
   const LoginPinScreenBody({super.key});
@@ -90,35 +91,25 @@ class _LoginPinScreenBodyState extends State<LoginPinScreenBody> {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                     return const HomeDashbordScreen();
                   }));
+                } else {
+                  if (provider.incorrectAttempts >= 5) {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                      return const PinResetScreen();
+                    }));
+                  }
                 }
               },
             ),
           ),
 
-          Padding(
-            padding: EdgeInsets.only(top: SizeClass.getHeight(0.05)),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                  return const LoginScreen();
-                }));
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(eIconAssets.emailIcon, color: appTheme.primary),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: CommonText(
-                      text: 'Use Email',
-                      fontSize: SizeClass.getWidth(0.038),
-                      textColor: appTheme.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  )
-                ],
-              ),
-            ),
+          UseEmailAndUsePinWidget(
+            title: 'Use Email',
+            icon: eIconAssets.emailIcon,
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                return const LoginScreen();
+              }));
+            },
           ),
         ],
       ),

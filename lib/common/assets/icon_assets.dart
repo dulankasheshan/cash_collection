@@ -2,6 +2,7 @@ class IconAssets{
 
   //login screen
   final emailIcon = 'assets/icons/auth/email.svg';
+  final pinIcon = 'assets/icons/auth/pin.svg';
   final passwordIcon = 'assets/icons/auth/lock.svg';
   final eyeIcon = 'assets/icons/auth/eye.svg';
   final eyeSlashIcon = 'assets/icons/auth/eye-slash.svg';

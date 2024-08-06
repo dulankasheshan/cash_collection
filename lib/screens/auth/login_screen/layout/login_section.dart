@@ -1,4 +1,5 @@
 import 'package:cash_collection/common/assets/index.dart';
+import 'package:cash_collection/screens/auth/login_pin_check_screen/login_pin_check_screen.dart';
 import 'package:cash_collection/screens/home_dashbord_screen/home_dashbord_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../../../../widgets/common_button_auth.dart';
 import '../../../../widgets/common_text.dart';
 import '../../../../widgets/common_text_button.dart';
 import '../../../../widgets/textfield_common.dart';
+import '../../commom_widgets/use_email_and_use_pin_widget.dart';
 import '../../forget_password_screens/forget_password_email_input_screen/forget_password_email_input_screen.dart';
 
 class LoginSection extends StatefulWidget {
@@ -93,7 +95,7 @@ class _LoginSectionState extends State<LoginSection> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: SizeClass.getHeight(0.05)),
+            padding: EdgeInsets.only(top: SizeClass.getHeight(0.05)),
             child: CommonAuthButton(
               text: 'Login',
               fontWeight: FontWeight.bold,
@@ -105,7 +107,19 @@ class _LoginSectionState extends State<LoginSection> {
                 }));
               },
             ),
+          ),
+
+          //@use email button
+          UseEmailAndUsePinWidget(
+            title: 'Use Pin',
+            icon: eIconAssets.pinIcon,
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                return const LoginPinCheckScreen();
+              }));
+            },
           )
+
         ],
       ),
     );

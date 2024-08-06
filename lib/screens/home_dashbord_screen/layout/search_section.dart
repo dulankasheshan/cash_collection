@@ -83,32 +83,32 @@ class SearchSection extends StatelessWidget {
           SizedBox(width: SizeClass.getWidth(0.03)),
 
           // Search button
-          GestureDetector(
-            onTap: navigateToCustomerSearchScreen,
-            child: Container(
-              width: SizeClass.getWidth(0.15),
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: appTheme.gradient,
-                boxShadow: [
-                  BoxShadow(
-                    color: appTheme.black.withOpacity(0.2),
-                    offset: Offset(0, 5),
-                    blurRadius: 10,
-                  ),
-                ],
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  eSvgAssets.add,
-                  color: appTheme.white,
-                  width: SizeClass.getWidth(0.06),
-                  height: SizeClass.getWidth(0.06),
-                ),
-              ),
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: navigateToCustomerSearchScreen,
+          //   child: Container(
+          //     width: SizeClass.getWidth(0.15),
+          //     height: 60,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(20),
+          //       color: appTheme.gradient,
+          //       boxShadow: [
+          //         BoxShadow(
+          //           color: appTheme.black.withOpacity(0.2),
+          //           offset: Offset(0, 5),
+          //           blurRadius: 10,
+          //         ),
+          //       ],
+          //     ),
+          //     child: Center(
+          //       child: SvgPicture.asset(
+          //         eSvgAssets.add,
+          //         color: appTheme.white,
+          //         width: SizeClass.getWidth(0.06),
+          //         height: SizeClass.getWidth(0.06),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

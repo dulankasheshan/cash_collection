@@ -74,7 +74,6 @@ class ClientDataInputProvider extends ChangeNotifier {
       case 'Bank Transfer':
         print('Payment Method: ${clientData.paymentMethod}');
         print('Amount: ${clientData.amount}');
-        // print('Bank Name: ${clientData.bankName}');
         break;
       default:
         print('Unknown payment method');

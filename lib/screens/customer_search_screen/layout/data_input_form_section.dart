@@ -10,7 +10,7 @@ import 'data_input_form.dart';
 class DataInputFormSection extends StatelessWidget {
   final String clientName;
 
-  const DataInputFormSection({Key? key, required this.clientName}) : super(key: key);
+  const DataInputFormSection({super.key, required this.clientName});
 
   @override
   Widget build(BuildContext context) {
