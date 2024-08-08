@@ -1,3 +1,4 @@
+import 'models/ClientDataModel.dart';
 import 'models/HelpQuestionAndAnswer.dart';
 
 class AppArray {
@@ -63,7 +64,7 @@ class AppArray {
   final userProfileImage = 'https://cdn.pixabay.com/photo/2018/05/04/12/21/man-3373868_640.jpg';
   final userName = 'Dulanka Sheshan';
   final userEmail = 'dulanka@gmail.com';
-  final userId = '#Ref17464';
+  final refId = '#Ref17464';
   final dailyCollectAmount = '15542.55';
 
   // List of collected users
@@ -80,23 +81,99 @@ class AppArray {
   ];
 
   // Registered Clients
-  final List<Map<String, String>> RegisteredClients = [
-    {'name': 'Arpico Super Centre', 'address': 'Pettah', 'image': 'https://upload.wikimedia.org/wikipedia/en/0/03/Arpico_Supercenter_logo.png'},
-    {'name': 'Singer Sri Lanka', 'address': 'Kandy', 'image': 'https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Singer_Sri_Lanka_logo.jpg/220px-Singer_Sri_Lanka_logo.jpg'},
-    {'name': 'Odel', 'address': 'Colombo 07', 'image': 'https://pbs.twimg.com/profile_images/980865257710133248/eZ2wY1g2_400x400.jpg'},
-    {'name': 'Healthguard', 'address': 'Colombo 04', 'image': 'https://s3-us-west-2.amazonaws.com/cbi-image-service-prd/original/a0b6979e-fe11-495e-a656-12ec7e8643b7.png'},
-    {'name': 'KFC Sri Lanka', 'address': 'Colombo 01', 'image': 'https://www.kfc.lk/images/logo.png'},
-    {'name': 'Softlogic Mobile Center', 'address': 'Colombo 03', 'image': 'https://pbs.twimg.com/profile_images/1747153854272266240/LrD7Gflx_400x400.jpg'},
-    {'name': 'Abans Electricals', 'address': 'Colombo 05', 'image': 'https://abansgroup.com/wp-content/uploads/2021/09/107983960_4005616912813387_644494594880947736_n.jpg'},
-    {'name': 'Laugfs Supermarket', 'address': 'Colombo 08', 'image': 'https://upload.wikimedia.org/wikipedia/en/9/93/LAUGFS_Gas_logo.png'},
-    {'name': 'Sarasavi Bookshop', 'address': 'Nugegoda', 'image': 'https://pbs.twimg.com/profile_images/609223432908111872/nkTlwWut_400x400.jpg'},
-    {'name': 'Galle Face Hotel', 'address': 'Colombo 02', 'image': 'https://cdn.pixabay.com/photo/2013/04/18/14/39/ship-105596_640.jpg'},
-    {'name': 'Cargills Food City', 'address': 'Battaramulla', 'image': 'https://www.cargillsceylon.com/wp-content/uploads/2023/09/favicon-3.png'},
-    {'name': 'Keells Super', 'address': 'Dehiwala', 'image': 'https://logosandtypes.com/wp-content/uploads/2024/04/Keells.png'},
-   {'name': 'Burger King Sri Lanka', 'address': 'Colombo 03', 'image': 'https://images.ctfassets.net/ih31w4gbf9hm/6zNwg4cQ6qIfhfEVJwQlBL/531538af566d1bb48ce4ce135892616c/burger-king-en.png'},
-    {'name': 'Sampath Bank', 'address': 'Colombo 01', 'image': 'https://www.sampath.lk/api/uploads/About_us_3ebc8008e5_70f299bca5_2128367c03_dba86e0943_f7d8c2d10e_67e1327e5f.jpg'},
-    {'name': 'Nations Trust Bank', 'address': 'Colombo 07', 'image': 'https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.ft.lk/assets/uploads/image_c7f274939e.jpg'},
+  final List<ClientDataModel> RegisteredClients = [
+    ClientDataModel(
+      clientId: '1',
+      clientName: 'Arpico Super Centre',
+      clientAddress: 'Pettah',
+      clientImage: 'https://upload.wikimedia.org/wikipedia/en/0/03/Arpico_Supercenter_logo.png',
+    ),
+    ClientDataModel(
+      clientId: '2',
+      clientName: 'Singer Sri Lanka',
+      clientAddress: 'Kandy',
+      clientImage: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Singer_Sri_Lanka_logo.jpg/220px-Singer_Sri_Lanka_logo.jpg',
+    ),
+    ClientDataModel(
+      clientId: '3',
+      clientName: 'Odel',
+      clientAddress: 'Colombo 07',
+      clientImage: 'https://pbs.twimg.com/profile_images/980865257710133248/eZ2wY1g2_400x400.jpg',
+    ),
+    ClientDataModel(
+      clientId: '4',
+      clientName: 'Healthguard',
+      clientAddress: 'Colombo 04',
+      clientImage: 'https://s3-us-west-2.amazonaws.com/cbi-image-service-prd/original/a0b6979e-fe11-495e-a656-12ec7e8643b7.png',
+    ),
+    ClientDataModel(
+      clientId: '5',
+      clientName: 'KFC Sri Lanka',
+      clientAddress: 'Colombo 01',
+      clientImage: 'https://www.kfc.lk/images/logo.png',
+    ),
+    ClientDataModel(
+      clientId: '6',
+      clientName: 'Softlogic Mobile Center',
+      clientAddress: 'Colombo 03',
+      clientImage: 'https://pbs.twimg.com/profile_images/1747153854272266240/LrD7Gflx_400x400.jpg',
+    ),
+    ClientDataModel(
+      clientId: '7',
+      clientName: 'Abans Electricals',
+      clientAddress: 'Colombo 05',
+      clientImage: 'https://abansgroup.com/wp-content/uploads/2021/09/107983960_4005616912813387_644494594880947736_n.jpg',
+    ),
+    ClientDataModel(
+      clientId: '8',
+      clientName: 'Laugfs Supermarket',
+      clientAddress: 'Colombo 08',
+      clientImage: 'https://upload.wikimedia.org/wikipedia/en/9/93/LAUGFS_Gas_logo.png',
+    ),
+    ClientDataModel(
+      clientId: '9',
+      clientName: 'Sarasavi Bookshop',
+      clientAddress: 'Nugegoda',
+      clientImage: 'https://pbs.twimg.com/profile_images/609223432908111872/nkTlwWut_400x400.jpg',
+    ),
+    ClientDataModel(
+      clientId: '10',
+      clientName: 'Galle Face Hotel',
+      clientAddress: 'Colombo 02',
+      clientImage: 'https://cdn.pixabay.com/photo/2013/04/18/14/39/ship-105596_640.jpg',
+    ),
+    ClientDataModel(
+      clientId: '11',
+      clientName: 'Cargills Food City',
+      clientAddress: 'Battaramulla',
+      clientImage: 'https://www.cargillsceylon.com/wp-content/uploads/2023/09/favicon-3.png',
+    ),
+    ClientDataModel(
+      clientId: '12',
+      clientName: 'Keells Super',
+      clientAddress: 'Dehiwala',
+      clientImage: 'https://logosandtypes.com/wp-content/uploads/2024/04/Keells.png',
+    ),
+    ClientDataModel(
+      clientId: '13',
+      clientName: 'Burger King Sri Lanka',
+      clientAddress: 'Colombo 03',
+      clientImage: 'https://images.ctfassets.net/ih31w4gbf9hm/6zNwg4cQ6qIfhfEVJwQlBL/531538af566d1bb48ce4ce135892616c/burger-king-en.png',
+    ),
+    ClientDataModel(
+      clientId: '14',
+      clientName: 'Sampath Bank',
+      clientAddress: 'Colombo 01',
+      clientImage: 'https://www.sampath.lk/api/uploads/About_us_3ebc8008e5_70f299bca5_2128367c03_dba86e0943_f7d8c2d10e_67e1327e5f.jpg',
+    ),
+    ClientDataModel(
+      clientId: '15',
+      clientName: 'Nations Trust Bank',
+      clientAddress: 'Colombo 07',
+      clientImage: 'https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.ft.lk/assets/uploads/image_c7f274939e.jpg',
+    ),
   ];
+
 
   //Notifications list
   final notifications = [

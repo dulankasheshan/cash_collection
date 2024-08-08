@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import '../common/models/ClientDataModel.dart';
+import 'package:image_picker/image_picker.dart';
+import '../common/models/ClientDataSubmitModel.dart';
 
 class ClientDataInputProvider extends ChangeNotifier {
   String? _paymentMethod;
@@ -9,6 +11,8 @@ class ClientDataInputProvider extends ChangeNotifier {
   String? _refId;
   String? _clientId;
   String? _bankName;
+  String? _imagePath;
+  bool _isSubmitted = false;
 
   void setPaymentMethod(String method) {
     _paymentMethod = method;
@@ -45,7 +49,20 @@ class ClientDataInputProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  ClientDataModel get clientData => ClientDataModel(
+  Future<void> pickImage(ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: source);
+    if (pickedFile != null) {
+      _imagePath = pickedFile.path;
+      notifyListeners();
+    }
+  }
+
+  String? get imagePath => _imagePath;
+
+  bool get isSubmitted => _isSubmitted;
+
+  ClientDataSubmitModel get clientData => ClientDataSubmitModel(
     paymentMethod: _paymentMethod ?? '',
     amount: _amount ?? '',
     checkNumber: _checkNumber,
@@ -55,7 +72,24 @@ class ClientDataInputProvider extends ChangeNotifier {
     bankName: _bankName,
   );
 
-  void submitData() {
+  bool submitData() {
+    _isSubmitted = true;
+    notifyListeners();
+
+    // Ensure all required fields are filled
+    if (_paymentMethod == null || _amount == null || _amount!.isEmpty) {
+      print('Please provide all necessary details.');
+      return false; // Keep the dialog open
+    }
+
+    // Ensure an image is selected only for Bank Transfer and Bank Cheque
+    if ((_paymentMethod == 'Bank Cheque' || _paymentMethod == 'Bank Transfer') && _imagePath == null) {
+      print('Please select an image.');
+      _isSubmitted = false;
+      notifyListeners();
+      return false; // Keep the dialog open
+    }
+
     print('Client ID: ${clientData.clientId}');
     print('Ref ID: ${clientData.refId}');
 
@@ -64,10 +98,10 @@ class ClientDataInputProvider extends ChangeNotifier {
         print('Payment Method: ${clientData.paymentMethod}');
         print('Amount: ${clientData.amount}');
         break;
-      case 'Bank Check':
+      case 'Bank Cheque':
         print('Payment Method: ${clientData.paymentMethod}');
-        print('Check Number: ${clientData.checkNumber}');
-        print('Check Realization Date: ${clientData.checkDate}');
+        print('Cheque Number: ${clientData.checkNumber}');
+        print('Cheque Realization Date: ${clientData.checkDate}');
         print('Amount: ${clientData.amount}');
         print('Bank Name: ${clientData.bankName}');
         break;
@@ -79,7 +113,11 @@ class ClientDataInputProvider extends ChangeNotifier {
         print('Unknown payment method');
     }
 
-    // Clear all values
+    if (_imagePath != null) {
+      print('Image Path: $_imagePath');
+    }
+
+    // Clear all values after submission
     _paymentMethod = null;
     _amount = null;
     _checkNumber = null;
@@ -87,6 +125,15 @@ class ClientDataInputProvider extends ChangeNotifier {
     _refId = null;
     _clientId = null;
     _bankName = null;
+    _imagePath = null;
+    _isSubmitted = false;
+    notifyListeners();
+
+    return true; // Allow the dialog to close
+  }
+
+  void clearImagePath() {
+    _imagePath = null;
     notifyListeners();
   }
 }

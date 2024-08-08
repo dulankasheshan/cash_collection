@@ -61,7 +61,7 @@ class _CustomerSearchSectionState extends State<CustomerSearchSection> {
                 children: [
                   SizedBox(width: SizeClass.getWidth(0.04)),
                   SvgPicture.asset(
-                    eSvgAssets.search,
+                    eIconAssets.search,
                     color: appTheme.white,
                     width: SizeClass.getWidth(0.06),
                     height: SizeClass.getWidth(0.06),
@@ -124,8 +124,8 @@ class _CustomerSearchSectionState extends State<CustomerSearchSection> {
               child: Center(
                 child: SvgPicture.asset(
                   _searchController.text.isNotEmpty
-                      ? eSvgAssets.close
-                      : eSvgAssets.search,
+                      ? eIconAssets.close
+                      : eIconAssets.search,
                   color: appTheme.white,
                   width: SizeClass.getWidth(0.06),
                   height: SizeClass.getWidth(0.06),

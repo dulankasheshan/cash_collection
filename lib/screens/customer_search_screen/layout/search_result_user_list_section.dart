@@ -1,8 +1,10 @@
+import 'package:cash_collection/common/app_array.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/theme/size_class.dart';
 import '../../../common/theme/theme_service.dart';
+import '../../../providers/client_data_input_provider.dart';
 import '../../../providers/customer_search_screen_provider.dart';
 import '../../../widgets/common_text.dart';
 
@@ -12,6 +14,8 @@ class SearchResultUserListSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeService>(context).appTheme;
+    final provider = Provider.of<ClientDataInputProvider>(context);
+
 
     return Container(
       width: double.infinity,
@@ -62,9 +66,15 @@ class SearchResultUserListSection extends StatelessWidget {
                   itemCount: searchResult.length,
                   itemBuilder: (context, index) {
                     final user = searchResult[index];
+                    final name = user.clientName ?? 'Unknown';
+                    final image = user.clientImage;
+                    final address = user.clientAddress ?? 'No address provided';
+
                     return GestureDetector(
                       onTap: () {
-                        searchProvider.showClientDataInputDialog(context, user['name']!);
+                        provider.setClientId(user.clientId);
+                        provider.setRefId(AppArray().refId);
+                        searchProvider.showClientDataInputDialog(context, user);
                       },
                       child: ListTile(
                         leading: Container(
@@ -76,15 +86,15 @@ class SearchResultUserListSection extends StatelessWidget {
                           ),
                           child: CircleAvatar(
                             backgroundColor: appTheme.lightBGColor,
-                            child: user['image'] != null
+                            child: image != null
                                 ? ClipOval(
                               child: Image.network(
-                                user['image']!,
+                                image,
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
                                   return Center(
                                     child: CommonText(
-                                      text: user['name']![0],
+                                      text: name[0],
                                       textColor: appTheme.lightText,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -94,7 +104,7 @@ class SearchResultUserListSection extends StatelessWidget {
                             )
                                 : Center(
                               child: CommonText(
-                                text: user['name']![0],
+                                text: name[0],
                                 textColor: appTheme.lightText,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -104,7 +114,7 @@ class SearchResultUserListSection extends StatelessWidget {
                         title: Align(
                           alignment: Alignment.centerLeft,
                           child: CommonText(
-                            text: user['name']!,
+                            text: name,
                             textColor: appTheme.darkText,
                             fontWeight: FontWeight.bold,
                           ),
@@ -112,7 +122,7 @@ class SearchResultUserListSection extends StatelessWidget {
                         subtitle: Align(
                           alignment: Alignment.centerLeft,
                           child: CommonText(
-                            text: user['address']!,
+                            text: address,
                             textColor: appTheme.darkText,
                           ),
                         ),

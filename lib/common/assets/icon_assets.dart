@@ -7,6 +7,20 @@ class IconAssets{
   final eyeIcon = 'assets/icons/auth/eye.svg';
   final eyeSlashIcon = 'assets/icons/auth/eye-slash.svg';
 
+  //home screen
+  final search = 'assets/icons/home_page/search.svg';
+  final setting = 'assets/icons/home_page/setting.svg';
+  final add = 'assets/icons/home_page/add.svg';
+  final close = 'assets/icons/home_page/close.svg';
+
+  //customer search screen
+  final cash = 'assets/icons/customer_search_screen/cash.svg';
+  final bankCheck = 'assets/icons/customer_search_screen/bank_check.svg';
+  final bank = 'assets/icons/customer_search_screen/bank.svg';
+  final calender = 'assets/icons/customer_search_screen/form/calender.svg';
+  final attachment = 'assets/icons/customer_search_screen/form/attachment.svg';
+
+
   //Setting Screen
   final themeIcon = 'assets/icons/setting/theme.svg';
   final notification = 'assets/icons/setting/notification.svg';
@@ -26,7 +40,7 @@ class IconAssets{
   final newsletter = 'assets/icons/setting/notification/newsletter.svg';
 
   //Profile page
-final camera = 'assets/icons/setting/account/camera.svg';
+  final camera = 'assets/icons/setting/account/camera.svg';
 
 
 }

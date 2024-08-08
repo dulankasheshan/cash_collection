@@ -80,7 +80,7 @@ class _UserImageAndEmailSectionState extends State<UserImageAndEmailSection> {
           textColor: appTheme.darkText,
         ),
         CommonText(
-          text: AppArray().userId,
+          text: AppArray().refId,
           fontSize: SizeClass.getWidth(0.04),
           fontWeight: FontWeight.w600,
           textColor: appTheme.lightText,

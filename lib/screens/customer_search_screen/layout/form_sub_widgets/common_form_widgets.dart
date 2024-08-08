@@ -30,15 +30,15 @@ class _CommonFormWidgetsState extends State<CommonFormWidgets> {
     final List<PaymentMethod> paymentMethods = [
       PaymentMethod(
         name: 'Cash',
-        icon: SvgPicture.asset(eSvgAssets.cash, width: 20, height: 20, color: appTheme.green),
+        icon: SvgPicture.asset(eIconAssets.cash, width: 20, height: 20, color: appTheme.green),
       ),
       PaymentMethod(
-        name: 'Bank Check',
-        icon: SvgPicture.asset(eSvgAssets.bankCheck, width: 20, height: 20, color: appTheme.blue),
+        name: 'Bank Cheque',
+        icon: SvgPicture.asset(eIconAssets.bankCheck, width: 20, height: 20, color: appTheme.blue),
       ),
       PaymentMethod(
         name: 'Bank Transfer',
-        icon: SvgPicture.asset(eSvgAssets.bank, width: 20, height: 20, color: appTheme.orange),
+        icon: SvgPicture.asset(eIconAssets.bank, width: 20, height: 20, color: appTheme.orange),
       ),
     ];
 

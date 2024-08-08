@@ -1,8 +1,12 @@
+import 'dart:io';
+
+import 'package:cash_collection/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../common/app_array.dart';
 import '../../../../common/theme/size_class.dart';
@@ -19,19 +23,13 @@ class IfBankChequeForm extends StatefulWidget {
 }
 
 class _IfBankChequeFormState extends State<IfBankChequeForm> {
-
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _checkNumberController = TextEditingController();
   final TextEditingController _checkDateController = TextEditingController();
   final TextEditingController _bankNameController = TextEditingController();
 
-
-
-
   @override
   Widget build(BuildContext context) {
-
-
     final appTheme = Provider.of<ThemeService>(context).appTheme;
     final provider = Provider.of<ClientDataInputProvider>(context);
 
@@ -64,12 +62,13 @@ class _IfBankChequeFormState extends State<IfBankChequeForm> {
       );
       if (selectedDate != null) {
         setState(() {
-          _checkDateController.text = DateFormat('yyyy-MM-dd').format(selectedDate);
-          Provider.of<ClientDataInputProvider>(context, listen: false).setCheckDate(DateFormat('yyyy-MM-dd').format(selectedDate));
+          _checkDateController.text =
+              DateFormat('yyyy-MM-dd').format(selectedDate);
+          Provider.of<ClientDataInputProvider>(context, listen: false)
+              .setCheckDate(DateFormat('yyyy-MM-dd').format(selectedDate));
         });
       }
     }
-
 
     return Column(
       children: [
@@ -79,14 +78,19 @@ class _IfBankChequeFormState extends State<IfBankChequeForm> {
               return const Iterable<String>.empty();
             }
             return AppArray().bankNames.where((String bank) {
-              return bank.toLowerCase().contains(textEditingValue.text.toLowerCase());
+              return bank
+                  .toLowerCase()
+                  .contains(textEditingValue.text.toLowerCase());
             });
           },
           onSelected: (String selectedBank) {
             _bankNameController.text = selectedBank;
             provider.setBankName(selectedBank);
           },
-          fieldViewBuilder: (BuildContext context, TextEditingController fieldTextEditingController, FocusNode fieldFocusNode, VoidCallback onFieldSubmitted) {
+          fieldViewBuilder: (BuildContext context,
+              TextEditingController fieldTextEditingController,
+              FocusNode fieldFocusNode,
+              VoidCallback onFieldSubmitted) {
             _bankNameController.text = fieldTextEditingController.text;
             return CommonFormTextField(
               controller: fieldTextEditingController,
@@ -140,7 +144,11 @@ class _IfBankChequeFormState extends State<IfBankChequeForm> {
                 color: appTheme.darkText,
               ),
               keyboardType: TextInputType.datetime,
-              suffixIcon: Icon(Icons.calendar_today, color: appTheme.darkText),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SvgPicture.asset(eIconAssets.calender,
+                    color: appTheme.lightText),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter the check realization date';
@@ -183,50 +191,66 @@ class _IfBankChequeFormState extends State<IfBankChequeForm> {
             provider.setAmount(value);
           },
         ),
-        SizedBox(height: SizeClass.getWidth(0.05)),
+        SizedBox(height: SizeClass.getHeight(0.02)),
 
-        // Attachments
-        GestureDetector(
-          onTap: () {
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(builder: (context) => const ReceiptScanScreen()),
-            // );
-          },
-          child: IntrinsicWidth(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: appTheme.lightBGColor,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    const Icon(Iconsax.attach_circle_copy),
-                    SizedBox(width: SizeClass.getWidth(0.02)),
-                    CommonText(
-                      text: 'Add a Image',
-                      textColor: appTheme.lightText,
-                      fontSize: SizeClass.getWidth(0.04),
-                      fontWeight: FontWeight.w600,
-                      textAlign: TextAlign.left,
+        //Attachment
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            Flexible(
+              child: GestureDetector(
+                onTap: () async {
+                  await provider.pickImage(ImageSource.camera);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: appTheme.lightBGColor,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          eIconAssets.attachment,
+                          color: appTheme.lightText,
+                          width: SizeClass.getWidth(0.05),
+                        ),
+                        SizedBox(width: SizeClass.getWidth(0.02)),
+
+                        CommonText(
+                          text: 'Add a Image',
+                          textColor: appTheme.lightText,
+                          fontSize: SizeClass.getWidth(0.04),
+                          fontWeight: FontWeight.w600,
+                          textAlign: TextAlign.left,
+                        ),
+                        if (provider.isSubmitted && provider.imagePath == null)
+                          const Text(
+                            '*',
+                            style: TextStyle(color: Colors.red),
+                          ),
+
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
+            if (provider.imagePath != null)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.file(
+                  File(provider.imagePath!),
+                  width: SizeClass.getWidth(0.1),
+                  height: SizeClass.getHeight(0.05),
+                  fit: BoxFit.cover,
+                ),
+              ),
+          ],
         ),
-
-        // if (imageProvider.imagePath != null)
-        //   Padding(
-        //     padding: const EdgeInsets.all(8.0),
-        //     child: Image.file(
-        //       File(imageProvider.imagePath!),
-        //       width: 100,
-        //       height: 100,
-        //     ),
-        //   ),
 
       ],
     );

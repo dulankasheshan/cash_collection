@@ -100,7 +100,7 @@ class CustomAppBar extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: SvgPicture.asset(eSvgAssets.setting,color: appTheme.white,),
+                    child: SvgPicture.asset(eIconAssets.setting,color: appTheme.white,),
                   ),
                 ),
               ),

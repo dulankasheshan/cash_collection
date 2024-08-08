@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../common/models/ClientDataModel.dart';
 import '../screens/customer_search_screen/layout/data_input_form_section.dart';
 
 class CustomerSearchScreenProvider with ChangeNotifier {
-  List<Map<String, String>> _searchResult = [];
-  final List<Map<String, String>> _allUsers;
+  List<ClientDataModel> _searchResult = [];
+  final List<ClientDataModel> _allUsers;
   String _searchQuery = '';
-  String? _selectedUserName;
+  ClientDataModel? _selectedUser;
 
   CustomerSearchScreenProvider(this._allUsers) {
-    // Initialize _searchResult with all users when the provider is created
     _searchResult = List.from(_allUsers);
   }
 
-  List<Map<String, String>> get searchResult => _searchResult;
+  List<ClientDataModel> get searchResult => _searchResult;
   String get searchQuery => _searchQuery;
-  String? get selectedUserName => _selectedUserName;
+  ClientDataModel? get selectedUser => _selectedUser;
 
   void updateSearchResult(String query) {
     _searchQuery = query;
     if (query.isEmpty) {
       _searchResult = List.from(_allUsers);
     } else {
-      _searchResult = _allUsers
-          .where((user) =>
-          user['name']!.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      _searchResult = _allUsers.where((user) {
+        return user.clientName.toLowerCase().contains(query.toLowerCase());
+      }).toList();
     }
     notifyListeners();
   }
@@ -36,8 +35,8 @@ class CustomerSearchScreenProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void showClientDataInputDialog(BuildContext context, String name) {
-    _selectedUserName = name;
+  void showClientDataInputDialog(BuildContext context, ClientDataModel user) {
+    _selectedUser = user;
     notifyListeners();
 
     showDialog(
@@ -45,11 +44,11 @@ class CustomerSearchScreenProvider with ChangeNotifier {
       builder: (context) {
         return ChangeNotifierProvider.value(
           value: this,
-          child: DataInputFormSection(clientName: name),
+          child: DataInputFormSection(clientName: user.clientName),
         );
       },
     ).then((_) {
-      _selectedUserName = null;
+      _selectedUser = null;
       notifyListeners();
     });
   }

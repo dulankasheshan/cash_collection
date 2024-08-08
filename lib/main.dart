@@ -46,8 +46,7 @@ void main() async {
           ChangeNotifierProvider(create: (_) => HomePageProvider()),
           ChangeNotifierProvider(create: (_) => ClientDataInputProvider()),
           ChangeNotifierProvider(
-            create: (_) => CustomerSearchScreenProvider(appArray.RegisteredClients),
-          ),
+            create: (_) => CustomerSearchScreenProvider(appArray.RegisteredClients)),
           ChangeNotifierProvider(create: (_) => KeyboardVisibilityProvider()),
           ChangeNotifierProvider(create: (_) => PasswordChangePageProvider()),
           ChangeNotifierProvider(create: (_) => NotificationSettingsProvider()),

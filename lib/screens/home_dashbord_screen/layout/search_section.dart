@@ -60,7 +60,7 @@ class SearchSection extends StatelessWidget {
                     SizedBox(width: SizeClass.getWidth(0.04)),
                     // Icon
                     SvgPicture.asset(
-                      eSvgAssets.search,
+                      eIconAssets.search,
                       color: appTheme.white,
                       width: SizeClass.getWidth(0.06),
                       height: SizeClass.getWidth(0.06),
@@ -80,7 +80,7 @@ class SearchSection extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: SizeClass.getWidth(0.03)),
+          // SizedBox(width: SizeClass.getWidth(0.03)),
 
           // Search button
           // GestureDetector(

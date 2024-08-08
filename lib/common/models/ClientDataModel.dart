@@ -1,25 +1,33 @@
-
 class ClientDataModel {
-  final String paymentMethod;
-  final String amount;
-  final String? checkNumber;
-  final String? checkDate;
-  final String refId;
   final String clientId;
-  final String? bankName;
+  final String clientName;
+  final String clientAddress;
+  final String clientImage;
 
   ClientDataModel({
-    required this.paymentMethod,
-    required this.amount,
-    this.checkNumber,
-    this.checkDate,
-    required this.refId,
     required this.clientId,
-    this.bankName,
+    required this.clientName,
+    required this.clientAddress,
+    required this.clientImage,
   });
 
+  // Factory constructor to create an instance from JSON
+  factory ClientDataModel.fromJson(Map<String, dynamic> json) {
+    return ClientDataModel(
+      clientId: json['clientId'],
+      clientName: json['clientName'],
+      clientAddress: json['clientAddress'],
+      clientImage: json['clientImage'],
+    );
+  }
 
-  // factory ClientDataModel.fromJson(Map<String, dynamic> json) => _$ClientDataModelFromJson(json);
-  //
-  // Map<String, dynamic> toJson() => _$ClientDataModelToJson(this);
+  // Method to convert the instance to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'clientId': clientId,
+      'clientName': clientName,
+      'clientAddress': clientAddress,
+      'clientImage': clientImage,
+    };
+  }
 }

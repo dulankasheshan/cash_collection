@@ -1,8 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../common/assets/index.dart';
 import '../../../../common/theme/size_class.dart';
 import '../../../../common/theme/theme_service.dart';
 import '../../../../providers/client_data_input_provider.dart';
@@ -58,38 +61,94 @@ class _IfBankTransferFormState extends State<IfBankTransferForm> {
         SizedBox(height: SizeClass.getWidth(0.05)),
 
         // Attachments
-        GestureDetector(
-          onTap: () {
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(builder: (context) => const ReceiptScanScreen()),
-            // );
-          },
-          child: IntrinsicWidth(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: appTheme.lightBGColor,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    const Icon(Iconsax.attach_circle_copy),
-                    SizedBox(width: SizeClass.getWidth(0.02)),
-                    CommonText(
-                      text: 'Add a Screenshot or Image',
-                      textColor: appTheme.lightText,
-                      fontSize: SizeClass.getWidth(0.04),
-                      fontWeight: FontWeight.w600,
-                      textAlign: TextAlign.left,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              child: GestureDetector(
+                onTap: () async {
+                  _showImageSourceDialog(context, provider);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: appTheme.lightBGColor,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          eIconAssets.attachment,
+                          color: appTheme.lightText,
+                          width: SizeClass.getWidth(0.05),
+                        ),
+                        SizedBox(width: SizeClass.getWidth(0.02)),
+                        CommonText(
+                          text: 'Add an Image or Screenshot',
+                          textColor: appTheme.lightText,
+                          fontSize: SizeClass.getWidth(0.04),
+                          fontWeight: FontWeight.w600,
+                          textAlign: TextAlign.left,
+                        ),
+                        if (provider.isSubmitted && provider.imagePath == null)
+                          const Text(
+                            '*',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
+            if (provider.imagePath != null)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.file(
+                  File(provider.imagePath!),
+                  width: SizeClass.getWidth(0.1),
+                  height: SizeClass.getHeight(0.05),
+                  fit: BoxFit.cover,
+                ),
+              ),
+          ],
         ),
+
       ],
+    );
+  }
+
+  void _showImageSourceDialog(BuildContext context, ClientDataInputProvider provider) {
+    final appTheme = Provider.of<ThemeService>(context, listen: false).appTheme;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: appTheme.screenBg,
+        title: Text('Choose image source'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Icon(Icons.camera, color: appTheme.darkText),
+              title: CommonText(text: 'Camera', textColor: appTheme.darkText),
+              onTap: () {
+                provider.pickImage(ImageSource.camera);
+                Navigator.of(context).pop();
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.image, color: appTheme.darkText),
+              title: CommonText(text: 'Gallery', textColor: appTheme.darkText),
+              onTap: () {
+                provider.pickImage(ImageSource.gallery);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

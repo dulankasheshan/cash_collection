@@ -82,8 +82,9 @@ flutter:
     - assets/icons/setting/notification/
     - assets/icons/setting/help/
     - assets/svg/auth/
-    - assets/svg/home_page/
-    - assets/svg/customer_search_screen/
+    - assets/icons/home_page/
+    - assets/icons/customer_search_screen/
+    - assets/icons/customer_search_screen/form/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

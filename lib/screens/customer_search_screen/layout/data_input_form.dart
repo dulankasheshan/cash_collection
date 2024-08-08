@@ -1,10 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/client_data_input_provider.dart';
 
 import '../../../../common/theme/size_class.dart';
-import '../../../../common/theme/theme_service.dart';
 import '../../../providers/key_bord_visibilaty_provider.dart';
 import '../../../widgets/common_button_auth.dart';
 import 'form_sub_widgets/common_form_widgets.dart';
@@ -63,7 +63,7 @@ class _DataInputFormState extends State<DataInputForm> with WidgetsBindingObserv
           if (provider.clientData.paymentMethod == 'Cash')
             const IfCashForm(),
 
-          if (provider.clientData.paymentMethod == 'Bank Check')
+          if (provider.clientData.paymentMethod == 'Bank Cheque')
             const IfBankChequeForm(),
 
           if (provider.clientData.paymentMethod == 'Bank Transfer')
@@ -75,12 +75,26 @@ class _DataInputFormState extends State<DataInputForm> with WidgetsBindingObserv
             fontWeight: FontWeight.bold,
             fontSize: SizeClass.getWidth(0.045),
             onTap: () {
+              if (kDebugMode) {
+                print('Submit button pressed');
+              }
+
               if (_formKey.currentState?.validate() ?? false) {
-                provider.submitData();
-                Navigator.of(context).pop();
+                bool isSuccess = provider.submitData();
+
+                if (isSuccess) {
+                  Navigator.of(context).pop(); // Close the dialog if successful
+                }
+                // else {
+                //   // Show an error message if submission failed
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //     const SnackBar(content: Text('Please complete all required fields, including selecting an image.')),
+                //   );
+                // }
               }
             },
           ),
+
         ],
       ),
     );

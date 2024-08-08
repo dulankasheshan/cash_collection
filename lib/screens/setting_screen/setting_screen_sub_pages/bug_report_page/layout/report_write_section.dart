@@ -50,7 +50,7 @@ class _ReportWriteSectionState extends State<ReportWriteSection> {
           textAlign: TextAlign.left,
         ),
         CommonText(
-          text: AppArray().userId,
+          text: AppArray().refId,
           textColor: appTheme.darkText,
           fontSize: SizeClass.getWidth(0.04),
           textAlign: TextAlign.left,

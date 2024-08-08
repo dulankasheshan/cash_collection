@@ -20,7 +20,7 @@ class _UserDetailSectionState extends State<UserDetailSection> {
       children: [
         CommonFormTextField(
           labelText: 'Ref Id',
-          defaultValue: AppArray().userId,
+          defaultValue: AppArray().refId,
           readOnly: true,
           labelStyle: TextStyle(
             fontFamily: 'Lato',
